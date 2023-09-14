@@ -53,6 +53,100 @@ ggplot(
 #That is, make a scatterplot with bill_depth_mm on the y-axis and bill_length_mm on the x-axis. 
 #Describe the relationship between these two variables.
 
+ggplot(
+  data = penguins,
+  mapping = aes(x = bill_length_mm, y = bill_depth_mm)
+) + 
+  geom_point(mapping = aes(color = species, shape = species )) +
+  geom_smooth(method = "lm") 
+
+#there is a negative relationship between depth and length
+
 #What happens if you make a scatterplot of species vs. bill_depth_mm? What might be a better choice of geom?
+
+ggplot(
+  data = penguins,
+  mapping = aes(x = bill_depth_mm, y = species)
+) +
+  geom_point()
   
 #Why does the following give an error and how would you fix it?
+ggplot(data = penguins) + 
+  geom_point()
+
+# no definition of the variables for plotting
+
+#What does the na.rm argument do in geom_point()? What is the default value of the argument? 
+#Create a scatterplot where you successfully use this argument set to TRUE.
+
+#default is false and it removes NA values
+ggplot(
+  data = penguins,
+  mapping = aes(x = flipper_length_mm, y = body_mass_g)
+) +
+  geom_point(mapping = aes(color = species, shape = species ), na.rm = TRUE) +
+  geom_smooth(method = "lm") +
+  labs(
+    title = "Body Mass and Flipper Length",
+    subtitle = "Dimensions for Adelie, Chinstrap, and Gentoo Penguins",
+    x = "Flipper length (mm)", y = "Body mass (g)",
+    color = "Species", shape = "Species"
+  ) +
+  scale_color_colorblind(
+  )
+
+#Add the following caption to the plot you made in the previous exercise: “Data come from the palmerpenguins package.” 
+#Hint: Take a look at the documentation for labs().
+
+ggplot(
+  data = penguins,
+  mapping = aes(x = flipper_length_mm, y = body_mass_g)
+) +
+  geom_point(mapping = aes(color = species, shape = species ), na.rm = TRUE) +
+  geom_smooth(method = "lm") +
+  labs(
+    title = "Body Mass and Flipper Length",
+    subtitle = "Dimensions for Adelie, Chinstrap, and Gentoo Penguins",
+    x = "Flipper length (mm)", y = "Body mass (g)",
+    caption = "Data come from the plamerpenguins package",
+    color = "Species", shape = "Species"
+  ) +
+  scale_color_colorblind(
+  )
+
+# Recreate the following visualization. 
+# What aesthetic should bill_depth_mm be mapped to? 
+# And should it be mapped at the global level or at the geom level?
+
+ggplot(
+  data = penguins, 
+  mapping = aes(x = flipper_length_mm, y = body_mass_g)
+) +
+  geom_point(mapping = aes(color = bill_depth_mm)) + 
+  geom_smooth()
+
+ggplot(
+  data = penguins,
+  mapping = aes(x = flipper_length_mm, y = body_mass_g, color = island)
+) +
+  geom_point() +
+  geom_smooth(se = FALSE)
+
+ggplot(
+  data = penguins,
+  mapping = aes(x = flipper_length_mm, y = body_mass_g)
+) +
+  geom_point() +
+  geom_smooth()
+
+ggplot() +
+  geom_point(
+    data = penguins,
+    mapping = aes(x = flipper_length_mm, y = body_mass_g)
+  ) +
+  geom_smooth(
+    data = penguins,
+    mapping = aes(x = flipper_length_mm, y = body_mass_g)
+  )
+
+
