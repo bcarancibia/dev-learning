@@ -1,4 +1,4 @@
-https://r4ds.hadley.nz/
+# https://r4ds.hadley.nz/
 
 library(tidyverse)
 library(palmerpenguins)
@@ -150,3 +150,18 @@ ggplot() +
   )
 
 
+penguins %>% 
+  ggplot(aes(x = flipper_length_mm, y = body_mass_g)) + 
+  geom_point()
+
+
+
+#visualization - categorical variable
+
+ggplot(penguins, aes(x=fct_infreq(species)))+ 
+  geom_bar()
+
+#visualization - numerical
+
+ggplot(penguins, aes(x= body_mass_g)) +
+  geom_histogram(binwidth = 200)
