@@ -165,3 +165,129 @@ ggplot(penguins, aes(x=fct_infreq(species)))+
 
 ggplot(penguins, aes(x= body_mass_g)) +
   geom_histogram(binwidth = 200)
+
+
+ggplot(penguins, aes(x=body_mass_g)) +
+  geom_histogram(binwidth = 20)
+
+ggplot(penguins, aes( x = body_mass_g))+
+  geom_histogram(binwidth = 2000)
+
+ggplot(penguins, aes(x = body_mass_g)) +
+  geom_density()
+
+
+#2.4.3 exercises
+ggplot(penguins, aes(y=species)) + 
+  geom_bar()
+
+ggplot(penguins, aes(x = species)) +
+  geom_bar(color = "red")
+
+ggplot(penguins, aes(x = species)) +
+  geom_bar(fill = "red")
+
+#What does the bins argument in geom_histogram() do?
+# it sets the width of the intervals in a histogram
+
+ggplot(diamonds, aes(x=carat)) +
+  geom_histogram(bin)
+
+
+#2.5 Visualizing Relationships
+
+ggplot(penguins, aes(x = species, y = body_mass_g)) +
+  geom_boxplot()
+
+ggplot(penguins, aes(x=body_mass_g, color = species)) +
+  geom_density(linewidth=0.75)
+
+
+ggplot(penguins, aes(x=body_mass_g, color = species, fill = species)) +
+  geom_density(alpha=0.5)
+
+##two categorical variables
+
+ggplot(penguins, aes(x= island, fill = species)) +
+  geom_bar()
+
+ggplot(penguins, aes(x=island, fill = species)) +
+  geom_bar(position="fill")
+
+## three or more variables
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
+  geom_point(aes(color = species, shape = island))
+
+#too complicated....facet it
+
+ggplot(penguins, aes( x= flipper_length_mm, y = body_mass_g)) +
+  geom_point(aes(color = species, shape = species)) +
+  facet_wrap(~island)
+
+
+##2.5.5 exercises
+
+?mpg
+
+# Make a scatterplot of hwy vs. displ using the mpg data frame. Next, map a third, numerical variable to color, 
+# then size, then both color and size, then shape. 
+# How do these aesthetics behave differently for categorical vs. numerical variables?
+
+ggplot(mpg, aes(x=displ, y = model, color = model )) + 
+  geom_density(linewidth=0.75)
+
+
+ggplot(penguins, aes(bill_length_mm, bill_depth_mm, color = species)) +
+  geom_point() +
+  facet_wrap(~species)
+
+
+ggplot(
+  data = penguins,
+  mapping = aes(
+    x = bill_length_mm, y = bill_depth_mm, 
+    color = species, shape = species
+  )
+) +
+  geom_point() +
+  labs(color = "Species")
+
+# two labels because of how the global variable vs local variable is defined
+
+ggplot(penguins, aes(x = island, fill = species)) +
+  geom_bar(position = "fill")
+ggplot(penguins, aes(x = species, fill = island)) +
+  geom_bar(position = "fill")
+
+
+# ggplot(data = mpg) 
+# + geom_point(mapping = aes(x = displ, y = hwy))
+# this won't work because of the + sign on the line
+
+
+library(nycflights13)
+library(tidyverse)
+flights
+
+flights %>% 
+  filter(dest == "IAH") %>% 
+  group_by(year, month, day) %>% 
+  summarize(
+    arr_delay = mean(arr_delay, na.rm = TRUE)
+  )
+
+flights %>% 
+  filter(dep_delay > 120)
+
+flights %>% 
+  filter(month %in% c(1,2))
+
+flights %>% 
+  arrange(year, month, day, dep_time)
+
+flights %>% 
+  distinct(origin, dest)
+
+
+
+
