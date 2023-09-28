@@ -27,3 +27,15 @@ oline_participation <- oline_participation %>%
 oline_participation %>%
   group_by(offense_personnel) %>%
   summarize(total = n())
+
+
+oline_snap_counts <- nflreadr::load_snap_counts(2022)
+oline_snap_count <- oline_snap_counts %>%
+  select(game_id, week, player, position, team, offense_pct) %>%
+  filter(position %in% c("T", "G", "C")) %>%
+  group_by(game_id, team) %>%
+  arrange(-offense_pct) %>%
+  dplyr::slice(1:5) %>%
+  ungroup()
+
+oline_snap_counts
