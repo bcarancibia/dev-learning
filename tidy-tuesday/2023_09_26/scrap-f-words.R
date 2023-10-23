@@ -11,4 +11,5 @@ richmondway %>%
 
 richmondway %>% 
   ggplot(aes(x=cum_total_season, y = Imdb_rating)) +
-  geom_point()
+  geom_point() +
+  geom_smooth()
