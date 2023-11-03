@@ -6,3 +6,6 @@ data(iris)
 ggplot(iris, aes(x = Petal.Length)) +
   geom_histogram() 
 
+
+#really like this guide
+# https://waterdata.usgs.gov/blog/ggplot-jazz/
