@@ -2,6 +2,7 @@ library(tidyverse)
 library(janitor)
 library(ggthemes)
 library(paletteer)
+library(showtext)
 house <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-11-07/house.csv')
 
 font_legend <- 'Merriweather Sans'
@@ -43,7 +44,13 @@ percent_party_filter <- percent_party %>%
 
 ggplot(percent_party_filter, (aes(candidatevotes / totalvotes, fill = party))) +
   geom_histogram(position = "identity", bins = 40, alpha = 0.7) + 
-  labs(x = "% of total votes", y = "Number of elections", fill = NULL)
+  labs(x = "% of total votes", y = "Number of elections", fill = NULL) + 
+  theme_ben()
+
+
+
+
+
 
 
   
