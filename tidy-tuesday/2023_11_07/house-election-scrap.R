@@ -45,7 +45,6 @@ ggplot(percent_party_filter, (aes(candidatevotes / totalvotes, fill = party))) +
   labs(x = "% of total votes", y = "Number of elections", fill = NULL) +
   theme_ben()
 
-#my theme is broken
 
 
 
