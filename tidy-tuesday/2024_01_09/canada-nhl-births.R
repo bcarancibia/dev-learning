@@ -43,3 +43,21 @@ tmp |>
 
 nhl_player_births_filter <- nhl_player_births |> 
   filter(birth_year >= 1991)
+
+
+nhl_player_births |> 
+  ggplot(aes(x=birth_month)) +
+  geom_bar() +
+  scale_x_continuous(breaks = seq(0, 12, by = 1)) 
+
+## looks like past july, you have less of a chance to play in the NHL
+
+
+nhl_player_births_filter |> 
+  ggplot(aes(x=birth_month, group = birth_year, color = birth_year)) +
+  geom_bar() +
+  scale_x_continuous(breaks = seq(0, 12, by = 1)) +
+  facet_wrap(~birth_year)
+
+
+## when you break it up years...doesn't seem that way.
